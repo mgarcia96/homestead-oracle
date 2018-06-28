@@ -56,7 +56,10 @@ class Homestead
 
     # Set date/time
     config.vm.provision :shell, :inline => "echo \"America/New_York\" | sudo tee /etc/timezone && dpkg-reconfigure --frontend noninteractive tzdata"
-
+    
+    # Fix error not found packages
+    config.vm.provision :shell, :inline => "apt-get update"
+    
     # Fix Error: Failed to fetch http://ppa.launchpad.net/ondrej/php-7.0/ubuntu/dists/trusty/main/binary-i386/Packages
     # config.vm.provision :shell, :inline => "sudo rm /etc/apt/sources.list.d/ondrej-php-*"
     config.vm.provision :shell, :inline => "sudo add-apt-repository ppa:ondrej/php"
